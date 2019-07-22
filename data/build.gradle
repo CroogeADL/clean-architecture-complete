@@ -1,0 +1,6 @@
+apply plugin: 'kotlin'
+apply from: rootProject.file('base-module.gradle')
+
+dependencies {
+    implementation project(path: ':domain')
+}

@@ -1,0 +1,1 @@
+include ':presentation', ':usecase', ':domain', ':data', ':framework'
