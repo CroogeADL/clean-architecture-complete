@@ -16,7 +16,7 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
     protected lateinit var binding: B
 
-    abstract val contentLayoutId: Int
+    protected abstract val contentLayoutId: Int
         @LayoutRes get
 
     protected open fun setupBinding(binding: B) {}
@@ -29,7 +29,11 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
     protected open fun setupViewModel() {}
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, contentLayoutId, container, false)
         binding.lifecycleOwner = this
         setupBinding(binding)
