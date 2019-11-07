@@ -1,14 +1,12 @@
 package com.example.cleanarchitectureandroidexample.ui.home
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cleanarchitectureandroidexample.common.BaseViewModel
 import com.example.usecase.joke.ChuckNorrisRandomJokeUseCase
 
-class HomeViewModel(application: Application) : BaseViewModel(application) {
-
-    private val chuckNorrisRandomJokeUseCase = provideUseCase(ChuckNorrisRandomJokeUseCase::class.java)
+class HomeViewModel(private val chuckNorrisRandomJokeUseCase: ChuckNorrisRandomJokeUseCase) :
+    BaseViewModel() {
 
     val chuckNorrisJokeUi: LiveData<ChuckNorrisJokeUi> = MutableLiveData()
 
@@ -21,7 +19,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     }
 
     private fun loadNextChuckNorrisJoke() {
-        chuckNorrisRandomJokeUseCase?.getRandomJokeAsync { result ->
+        chuckNorrisRandomJokeUseCase.getRandomJokeAsync { result ->
             result.data?.let { joke ->
                 chuckNorrisJokeUi.setValue(ChuckNorrisJokeToChuckNorrisJokeUiMapper().map(joke))
             }
